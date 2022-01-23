@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+}
+
+group 'by.mrf1n.finance'
+version '1.0-SNAPSHOT'
+sourceCompatibility = '17'
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    testCompileOnly {
+        extendsFrom testAnnotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    annotationProcessor 'org.projectlombok:lombok:1.18.22'
+    testAnnotationProcessor 'org.projectlombok:lombok:1.18.22'
+    implementation 'org.springframework:spring-webflux:5.3.14'
+    implementation 'org.springframework:spring-context:5.3.14'
+    implementation 'com.fasterxml.jackson.core:jackson-databind:2.13.1'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test:2.6.2'
+    implementation 'io.projectreactor.netty:reactor-netty:1.0.13'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.8.2'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.8.2'
+}
+
+test {
+    useJUnitPlatform()
+}
