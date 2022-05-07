@@ -1,5 +1,6 @@
 package by.mrf1n.finance.currencycom.model;
 
+import by.mrf1n.finance.currencycom.model.enums.Interval;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -22,7 +23,7 @@ import java.math.BigInteger;
 public class KLinesRequest implements Serializable {
 
   private BigInteger endTime;
-  private String interval;
+  private Interval interval;
   private Integer limit;
   private BigInteger startTime;
   private String symbol;

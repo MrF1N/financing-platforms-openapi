@@ -2,6 +2,7 @@ package by.mrf1n.finance.currencycom.webclient;
 
 import by.mrf1n.finance.currencycom.CurrencyComOpenApi;
 import by.mrf1n.finance.currencycom.context.EnvironmentContext;
+import by.mrf1n.finance.currencycom.context.MarketCapContext;
 import by.mrf1n.finance.currencycom.context.MarketContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -24,7 +25,25 @@ public class WebClientCurrencyComOpenApi extends CurrencyComOpenApi {
     this.marketContext = marketContext;
   }
 
+  @Autowired
+  @Qualifier("marketCryptoContextImpl")
+  public void setMarketCryptoContext(MarketCapContext marketCryptoContext) {
+    this.marketCryptoContext = marketCryptoContext;
+  }
+
+  @Autowired
+  @Qualifier("marketTokenContextImpl")
+  public void setMarketTokenContext(MarketCapContext marketTokenContext) {
+    this.marketTokenContext = marketTokenContext;
+  }
+
+  @Autowired
+  @Qualifier("marketTokenCryptoContextImpl")
+  public void setMarketTokenCryptoContext(MarketCapContext marketTokenCryptoContext) {
+    this.marketTokenCryptoContext = marketTokenCryptoContext;
+  }
+
   @Override
-  public void close() throws IOException {
+  public void close() {
   }
 }

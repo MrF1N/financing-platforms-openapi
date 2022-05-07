@@ -3,6 +3,7 @@ package by.mrf1n.finance.currencycom;
 import by.mrf1n.finance.currencycom.model.ExchangeInfo;
 import by.mrf1n.finance.currencycom.model.KLinesRequest;
 import by.mrf1n.finance.currencycom.model.KLinesResponse;
+import by.mrf1n.finance.currencycom.model.enums.Interval;
 import by.mrf1n.finance.currencycom.webclient.WebClientCurrencyComOpenApi;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,8 +27,8 @@ public class WebClientCurrencyComOpenApiTest {
   @Test
   void getKlinesTest() {
     KLinesRequest request = KLinesRequest.builder()
-        .interval("1m")
-        .symbol("LTC%2FBTC")
+        .interval(Interval.M1)
+        .symbol("LTC/BTC")
         .build();
     List<List<Number>> klines = webClientCurrencyComOpenApi.getMarketContext().getKlines(request);
     System.out.println(klines);

@@ -11,6 +11,7 @@ public enum AssetType {
   ICO,
   INDEX,
   INTEREST_RATE,
+  OPT_TOKENS,
   OTHER_ASSET,
   REAL_ESTATE,
   UTILITY_TOKENS

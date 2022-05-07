@@ -1,7 +1,10 @@
 api:
-  hostApiUrl: 'https://api-adapter.backend.currency.com/api/v2/'
-  demoHostApiUrl: 'https://demo-api-adapter.backend.currency.com/api/v2/'
-paths:
+  adapterApiUrl: 'https://api-adapter.backend.currency.com/api/v2/'
+  demoAdapterApiUrl: 'https://demo-api-adapter.backend.currency.com/api/v2/'
+  marketCryptoApiUrl: 'https://marketcap.backend.currency.com/api/v1/'
+  marketTokenCryptoApiUrl: 'https://marketcap.backend.currency.com/api/v1/token_crypto/'
+  marketTokenApiUrl: 'https://marketcap.backend.currency.com/api/v1/token/'
+adapter-paths:
   accountInfo: 'account'
   tradesAggregated: 'aggTrades'
   tradingPositionClose: 'closeTradingPosition'
@@ -19,3 +22,11 @@ paths:
   listOfHistoricalPositions: 'tradingPositionsHistory'
   leverageOrdersEdit: 'updateTradingOrder'
   leverageTradeEdit: 'updateTradingPosition'
+marketcap-paths:
+  listOfAssets: 'assets'
+  candlesData: 'candles'
+  OHLC: 'OHLC'
+  orderbook: 'orderbook'
+  marketData: 'summary'
+  priceChange: 'ticker'
+  listOfTrades: 'trades'

@@ -1,20 +1,29 @@
 package by.mrf1n.finance.currencycom;
 
+import by.mrf1n.finance.currencycom.property.CurrencyComAdapterProperties;
+import by.mrf1n.finance.currencycom.property.CurrencyComApiUrlProperties;
+import by.mrf1n.finance.currencycom.property.CurrencyComMarketProperties;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 
-@ContextConfiguration(classes = {CurrencyComPathProperties.class, CurrencyComApiProperties.class})
+@ContextConfiguration(classes = {
+        CurrencyComAdapterProperties.class,
+        CurrencyComApiUrlProperties.class,
+        CurrencyComMarketProperties.class})
 @SpringBootTest
 public class CurrencyComPropertiesTest {
 
   @Autowired
-  private CurrencyComPathProperties pathProperties;
+  private CurrencyComAdapterProperties pathProperties;
 
   @Autowired
-  private CurrencyComApiProperties apiProperties;
+  private CurrencyComApiUrlProperties apiProperties;
+
+  @Autowired
+  private CurrencyComMarketProperties marketProperties;
 
   @Test
   void testProperties() {
@@ -37,8 +46,8 @@ public class CurrencyComPropertiesTest {
     Assertions.assertEquals("updateTradingPosition", pathProperties.getLeverageTradeEdit());
 
     Assertions.assertEquals("https://api-adapter.backend.currency.com/api/v2/",
-        apiProperties.getHostApiUrl());
+        apiProperties.getAdapterApiUrl());
     Assertions.assertEquals("https://demo-api-adapter.backend.currency.com/api/v2/",
-        apiProperties.getDemoHostApiUrl());
+        apiProperties.getDemoAdapterApiUrl());
   }
 }

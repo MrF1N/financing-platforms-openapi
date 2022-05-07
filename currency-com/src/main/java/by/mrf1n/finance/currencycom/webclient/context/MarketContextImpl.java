@@ -1,27 +1,27 @@
-package by.mrf1n.finance.currencycom.webclient;
+package by.mrf1n.finance.currencycom.webclient.context;
 
 import by.mrf1n.finance.currencycom.context.MarketContext;
 import by.mrf1n.finance.currencycom.model.ExchangeInfo;
 import by.mrf1n.finance.currencycom.model.KLinesRequest;
-import by.mrf1n.finance.currencycom.model.KLinesResponse;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
-import reactor.core.publisher.Mono;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class MarketContextImpl extends BaseContextImpl implements MarketContext {
 
-  public MarketContextImpl(String authKey, String authSecret, WebClient client) {
-    super(authKey, authSecret, client);
+  @Autowired
+  public MarketContextImpl(String authKey, String authSecret, WebClient adapterWebClient) {
+    super(authKey, authSecret, adapterWebClient);
   }
 
   @Override
   public ExchangeInfo getExchangeInfo() {
-    return this.client.get().uri(pathProperties.getExchangeInfo())
+    return this.client.get().uri(adapterProperties.getExchangeInfo())
         .retrieve()
         .bodyToMono(ExchangeInfo.class).block();
   }
@@ -29,9 +29,9 @@ public class MarketContextImpl extends BaseContextImpl implements MarketContext 
   @Override
   public List<List<Number>> getKlines(KLinesRequest request) {
     return this.client.get()
-        .uri(uriBuilder -> uriBuilder.path(pathProperties.getKlines())
-            .queryParam("symbol", request.getSymbol())
-            .queryParam("interval", request.getInterval())
+        .uri(uriBuilder -> uriBuilder.path(adapterProperties.getKlines())
+            .queryParamIfPresent("symbol", Optional.ofNullable(request.getSymbol()))
+            .queryParamIfPresent("interval", Optional.ofNullable(request.getInterval()))
             .build()
         )
         .retrieve()

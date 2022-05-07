@@ -1,55 +1,52 @@
-package by.mrf1n.finance.currencycom;
+package by.mrf1n.finance.currencycom.property;
 
 import by.mrf1n.finance.currencycom.common.YamlPropertySourceFactory;
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.stereotype.Component;
 
 @Getter
 @Setter
 @ToString
 @Configuration
 @PropertySource(value = "classpath:currencycom.yml", factory = YamlPropertySourceFactory.class)
-public class CurrencyComPathProperties {
+public class CurrencyComAdapterProperties {
 
-  @Value("${paths.accountInfo}")
+  @Value("${adapter-paths.accountInfo}")
   private String accountInfo;
-  @Value("${paths.tradesAggregated}")
+  @Value("${adapter-paths.tradesAggregated}")
   private String tradesAggregated;
-  @Value("${paths.tradingPositionClose}")
+  @Value("${adapter-paths.tradingPositionClose}")
   private String tradingPositionClose;
-  @Value("${paths.orderBook}")
+  @Value("${adapter-paths.orderBook}")
   private String orderBook;
-  @Value("${paths.klines}")
+  @Value("${adapter-paths.klines}")
   private String klines;
-  @Value("${paths.exchangeInfo}")
+  @Value("${adapter-paths.exchangeInfo}")
   private String exchangeInfo;
-  @Value("${paths.leverageSettings}")
+  @Value("${adapter-paths.leverageSettings}")
   private String leverageSettings;
-  @Value("${paths.listOfTrades}")
+  @Value("${adapter-paths.listOfTrades}")
   private String listOfTrades;
-  @Value("${paths.listOfOpenOrders}")
+  @Value("${adapter-paths.listOfOpenOrders}")
   private String listOfOpenOrders;
-  @Value("${paths.createOrder}")
+  @Value("${adapter-paths.createOrder}")
   private String createOrder;
-  @Value("${paths.cancelOrder}")
+  @Value("${adapter-paths.cancelOrder}")
   private String cancelOrder;
-  @Value("${paths.priceChange}")
+  @Value("${adapter-paths.priceChange}")
   private String priceChange;
-  @Value("${paths.serverTime}")
+  @Value("${adapter-paths.serverTime}")
   private String serverTime;
-  @Value("${paths.listOfLeverageTrades}")
+  @Value("${adapter-paths.listOfLeverageTrades}")
   private String listOfLeverageTrades;
-  @Value("${paths.listOfHistoricalPositions}")
+  @Value("${adapter-paths.listOfHistoricalPositions}")
   private String listOfHistoricalPositions;
-  @Value("${paths.leverageOrdersEdit}")
+  @Value("${adapter-paths.leverageOrdersEdit}")
   private String leverageOrdersEdit;
-  @Value("${paths.leverageTradeEdit}")
+  @Value("${adapter-paths.leverageTradeEdit}")
   private String leverageTradeEdit;
 }

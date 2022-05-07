@@ -1,19 +1,23 @@
 package by.mrf1n.finance.currencycom;
 
+import by.mrf1n.finance.currencycom.property.CurrencyComAdapterProperties;
+import by.mrf1n.finance.currencycom.property.CurrencyComApiUrlProperties;
+import by.mrf1n.finance.currencycom.property.CurrencyComMarketProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.codec.ClientCodecConfigurer;
 import org.springframework.web.reactive.function.client.WebClient;
 
 @Configuration
-@Import({CurrencyComPathProperties.class, CurrencyComApiProperties.class})
+@Import({CurrencyComAdapterProperties.class,
+        CurrencyComApiUrlProperties.class,
+        CurrencyComMarketProperties.class})
 @ComponentScan(basePackages = {"by.mrf1n.finance.currencycom.webclient"})
 public class CurrencyComOpenApiConfig {
 
-  protected CurrencyComApiProperties apiProperties;
+  protected CurrencyComApiUrlProperties apiProperties;
 
   @Bean
   public String authKey() {
@@ -32,14 +36,35 @@ public class CurrencyComOpenApiConfig {
 
   @Bean
   public String apiUrl() {
-    return sandboxMode() ? apiProperties.getDemoHostApiUrl() : apiProperties.getHostApiUrl();
+    return sandboxMode() ? apiProperties.getDemoAdapterApiUrl() : apiProperties.getAdapterApiUrl();
   }
 
   @Bean
-  public WebClient webClient(WebClient.Builder builder) {
+  public WebClient adapterWebClient(WebClient.Builder builder) {
     return builder
         .baseUrl(this.apiUrl())
         .build();
+  }
+
+  @Bean
+  public WebClient marketCryptoWebClient(WebClient.Builder builder) {
+    return builder
+            .baseUrl(this.apiProperties.getMarketCryptoApiUrl())
+            .build();
+  }
+
+  @Bean
+  public WebClient marketTokenCryptoWebClient(WebClient.Builder builder) {
+    return builder
+            .baseUrl(this.apiProperties.getMarketTokenCryptoApiUrl())
+            .build();
+  }
+
+  @Bean
+  public WebClient marketTokenWebClient(WebClient.Builder builder) {
+    return builder
+            .baseUrl(this.apiProperties.getMarketTokenApiUrl())
+            .build();
   }
 
   @Bean
@@ -51,7 +76,7 @@ public class CurrencyComOpenApiConfig {
   }
 
   @Autowired
-  public CurrencyComOpenApiConfig(CurrencyComApiProperties apiProperties) {
+  public CurrencyComOpenApiConfig(CurrencyComApiUrlProperties apiProperties) {
     this.apiProperties = apiProperties;
   }
 }

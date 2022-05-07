@@ -9,12 +9,14 @@ import org.springframework.context.annotation.Import;
 public class CurrencyComOpenApiTestConfig {
   @Bean
   public String authKey() {
-    return System.getenv("authSecret");
+//    return System.getenv("authSecret");
+    return "";
   }
 
   @Bean
   public String authSecret() {
-    return System.getenv("authSecret");
+//    return System.getenv("authSecret");
+    return "";
   }
 
   @Bean
