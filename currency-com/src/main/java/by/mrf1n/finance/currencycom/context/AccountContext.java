@@ -5,6 +5,6 @@ import by.mrf1n.finance.currencycom.model.AccountResponse;
 
 public interface AccountContext {
 
-  public AccountResponse getAccountInfo(AccountRequest request);
+  AccountResponse getAccountInfo(AccountRequest request);
 
 }

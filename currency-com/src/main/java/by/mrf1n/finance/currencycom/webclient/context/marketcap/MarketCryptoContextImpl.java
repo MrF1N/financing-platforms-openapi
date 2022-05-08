@@ -1,4 +1,4 @@
-package by.mrf1n.finance.currencycom.webclient.context;
+package by.mrf1n.finance.currencycom.webclient.context.marketcap;
 
 import by.mrf1n.finance.currencycom.model.enums.Interval;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -31,7 +31,7 @@ public class CurrencyComOpenApiConfig {
 
   @Bean
   public boolean sandboxMode() {
-    return false;
+    return true;
   }
 
   @Bean

@@ -1,4 +1,4 @@
-package by.mrf1n.finance.currencycom.webclient.context;
+package by.mrf1n.finance.currencycom.webclient.context.marketcap;
 
 import by.mrf1n.finance.currencycom.model.enums.TradeType;
 import by.mrf1n.finance.currencycom.property.CurrencyComMarketProperties;
@@ -6,6 +6,7 @@ import by.mrf1n.finance.currencycom.context.MarketCapContext;
 import by.mrf1n.finance.currencycom.model.*;
 import by.mrf1n.finance.currencycom.model.enums.Depth;
 import by.mrf1n.finance.currencycom.model.enums.Interval;
+import by.mrf1n.finance.currencycom.webclient.context.BaseContextImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.reactive.function.client.WebClient;

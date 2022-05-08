@@ -10,13 +10,13 @@ public class CurrencyComOpenApiTestConfig {
   @Bean
   public String authKey() {
 //    return System.getenv("authSecret");
-    return "";
+    return "zrAi2AXQi9c0zEic";
   }
 
   @Bean
   public String authSecret() {
 //    return System.getenv("authSecret");
-    return "";
+    return ".O&.bDf@jpugeHyce7%t%dtM90rSyHOi";
   }
 
   @Bean

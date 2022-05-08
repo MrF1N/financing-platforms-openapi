@@ -5,5 +5,5 @@ import by.mrf1n.finance.currencycom.model.TradingPositionCloseAllResponse;
 
 public interface TradeLeverageContext {
 
-  public TradingPositionCloseAllResponse closeTradingPosition(CloseTradingPositionRequest request);
+  TradingPositionCloseAllResponse closeTradingPosition(CloseTradingPositionRequest request);
 }

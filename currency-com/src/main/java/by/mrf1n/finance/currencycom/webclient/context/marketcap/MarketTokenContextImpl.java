@@ -1,4 +1,4 @@
-package by.mrf1n.finance.currencycom.webclient.context;
+package by.mrf1n.finance.currencycom.webclient.context.marketcap;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;

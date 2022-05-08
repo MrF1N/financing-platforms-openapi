@@ -7,7 +7,7 @@ import by.mrf1n.finance.currencycom.model.DepthResponse;
 
 public interface TradeContext {
 
-  public AggTradesResponse getAggTrades(AggTradesRequest request);
+  AggTradesResponse getAggTrades(AggTradesRequest request);
 
-  public DepthResponse getOrderBook(DepthRequest request);
+  DepthResponse getOrderBook(DepthRequest request);
 }
