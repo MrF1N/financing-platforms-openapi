@@ -1,6 +1,6 @@
 api:
-  adapterApiUrl: 'https://api-adapter.backend.currency.com/api/v2/'
-  demoAdapterApiUrl: 'https://demo-api-adapter.backend.currency.com/api/v2/'
+  adapterApiUrl: 'https://api-adapter.backend.currency.com/api/{apiVersion}/'
+  demoAdapterApiUrl: 'https://demo-api-adapter.backend.currency.com/api/{apiVersion}/'
   marketCryptoApiUrl: 'https://marketcap.backend.currency.com/api/v1/'
   marketTokenCryptoApiUrl: 'https://marketcap.backend.currency.com/api/v1/token_crypto/'
   marketTokenApiUrl: 'https://marketcap.backend.currency.com/api/v1/token/'

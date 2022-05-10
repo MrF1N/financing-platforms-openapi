@@ -1,5 +1,6 @@
 package by.mrf1n.finance.currencycom;
 
+import by.mrf1n.finance.currencycom.context.AccountContext;
 import by.mrf1n.finance.currencycom.context.EnvironmentContext;
 import by.mrf1n.finance.currencycom.context.MarketCapContext;
 import by.mrf1n.finance.currencycom.context.MarketContext;
@@ -16,6 +17,8 @@ public abstract class CurrencyComOpenApi implements Closeable {
 
   protected EnvironmentContext environmentContext;
   protected MarketContext marketContext;
+
+  protected AccountContext accountContext;
   protected MarketCapContext marketCryptoContext;
   protected MarketCapContext marketTokenContext;
   protected MarketCapContext marketTokenCryptoContext;
@@ -26,6 +29,10 @@ public abstract class CurrencyComOpenApi implements Closeable {
 
   public MarketContext getMarketContext() {
     return this.marketContext;
+  }
+
+  public AccountContext getAccountContext() {
+    return accountContext;
   }
 
   public MarketCapContext getMarketCryptoContext() {
@@ -43,6 +50,8 @@ public abstract class CurrencyComOpenApi implements Closeable {
   public abstract void setEnvironmentContext(EnvironmentContext environmentContext);
 
   public abstract void setMarketContext(MarketContext marketContext);
+
+  public abstract void setAccountContext(AccountContext accountContext);
 
   public abstract void setMarketCryptoContext(MarketCapContext marketCryptoContext);
 

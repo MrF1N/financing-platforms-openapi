@@ -1,4 +1,4 @@
-package by.mrf1n.finance.currencycom.webclient.context.marketcap;
+package by.mrf1n.finance.currencycom.webclient.context;
 
 import by.mrf1n.finance.currencycom.model.enums.TradeType;
 import by.mrf1n.finance.currencycom.property.CurrencyComMarketProperties;
@@ -22,8 +22,8 @@ public abstract class MarketCapContextImpl extends BaseContextImpl implements Ma
 
     protected CurrencyComMarketProperties marketProperties;
 
-    public MarketCapContextImpl(String authKey, String authSecret, WebClient client) {
-        super(authKey, authSecret, client);
+    public MarketCapContextImpl() {
+        super("", "");
     }
 
     @Override
@@ -105,5 +105,10 @@ public abstract class MarketCapContextImpl extends BaseContextImpl implements Ma
     @Autowired
     public void setCurrencyComMarketProperties(CurrencyComMarketProperties marketProperties) {
         this.marketProperties = marketProperties;
+    }
+
+    @Autowired
+    public void setClient(WebClient marketCryptoWebClient) {
+        this.client = marketCryptoWebClient;
     }
 }
