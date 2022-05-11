@@ -1,5 +1,6 @@
 package by.mrf1n.finance.currencycom.model;
 
+import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.math.BigInteger;
 @ToString
 @EqualsAndHashCode
 @RequiredArgsConstructor
+@AllArgsConstructor
 public class AggTrades implements Serializable {
 
   //Timestamp

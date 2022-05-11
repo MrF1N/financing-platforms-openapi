@@ -15,6 +15,7 @@ import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 import reactor.core.publisher.Mono;
 
+import java.math.BigInteger;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -43,6 +44,11 @@ public class CurrencyComOpenApiConfig {
     }
 
     @Bean
+    public BigInteger recvWindow() {
+        return BigInteger.valueOf(60000);
+    }
+
+    @Bean
     public String apiUrl() {
         return sandboxMode() ? apiProperties.getDemoAdapterApiUrl() : apiProperties.getAdapterApiUrl();
     }
@@ -55,7 +61,7 @@ public class CurrencyComOpenApiConfig {
     @Bean
     public WebClient adapterWebClient(WebClient.Builder builder, String authKey, String apiVersion) {
         return builder
-                .baseUrl(this.apiProperties.getAdapterApiUrl())
+                .baseUrl(this.apiUrl())
                 .defaultUriVariables(Map.of("apiVersion", apiVersion))
                 .defaultHeader("X-MBX-APIKEY", authKey)
                 .build();
@@ -91,7 +97,7 @@ public class CurrencyComOpenApiConfig {
     }
 
     @Autowired
-    public CurrencyComOpenApiConfig(CurrencyComApiUrlProperties apiProperties) {
+    public void setCurrencyComApiUrlProperties(CurrencyComApiUrlProperties apiProperties) {
         this.apiProperties = apiProperties;
     }
 }

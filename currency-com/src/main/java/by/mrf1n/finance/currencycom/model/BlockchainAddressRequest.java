@@ -18,11 +18,11 @@ import java.math.BigInteger;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class AggTradesRequest implements Serializable {
+public class BlockchainAddressRequest implements Serializable {
 
-  private BigInteger endTime;
-  private Integer limit;
-  private BigInteger startTime;
-  private String symbol;
-
+    private String apiKey;
+    private String coin;
+    private BigInteger recvWindow;
+    private String signature;
+    private BigInteger timestamp;
 }

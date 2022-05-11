@@ -79,9 +79,9 @@ public class MarketCapCurrencyComOpenApiTest {
     }
 
     @Autowired
-    public void setWebClientCurrencyComOpenApi(WebClientCurrencyComOpenApi webClientCurrencyComOpenApi) {
-        this.marketCryptoContext = webClientCurrencyComOpenApi.getMarketCryptoContext();
-        this.marketTokenContext = webClientCurrencyComOpenApi.getMarketTokenContext();
-        this.marketTokenCryptoContext = webClientCurrencyComOpenApi.getMarketTokenCryptoContext();
+    public void setWebClientCurrencyComOpenApi(WebClientCurrencyComOpenApi currencyComOpenApi) {
+        this.marketCryptoContext = currencyComOpenApi.getMarketCryptoContext();
+        this.marketTokenContext = currencyComOpenApi.getMarketTokenContext();
+        this.marketTokenCryptoContext = currencyComOpenApi.getMarketTokenCryptoContext();
     }
 }

@@ -8,9 +8,15 @@ adapter-paths:
   accountInfo: 'account'
   tradesAggregated: 'aggTrades'
   tradingPositionClose: 'closeTradingPosition'
+  listOfCurrencies: "currencies"
+  stringOfAddress: "depositAddress"
+  listOfDeposits: "deposits"
   orderBook: 'depth'
   exchangeInfo: 'exchangeInfo'
+  order: "fetchOrder"
+  listOfFundingLimits: "fundingLimits"
   klines: 'klines'
+  listOfLedgers: "ledger"
   leverageSettings: 'leverageSettings'
   listOfTrades: 'myTrades'
   listOfOpenOrders: 'openOrders'
@@ -18,10 +24,14 @@ adapter-paths:
   cancelOrder: 'order'
   priceChange: 'ticker/24hr'
   serverTime: 'time'
+  listOfFees: "tradingFees"
+  listOfLimits: "tradingLimits"
   listOfLeverageTrades: 'tradingPositions'
   listOfHistoricalPositions: 'tradingPositionsHistory'
+  listOfTransactions: "transactions"
   leverageOrdersEdit: 'updateTradingOrder'
   leverageTradeEdit: 'updateTradingPosition'
+  listOfWithdrawals: "withdrawals"
 marketcap-paths:
   listOfAssets: 'assets'
   candlesData: 'candles'
