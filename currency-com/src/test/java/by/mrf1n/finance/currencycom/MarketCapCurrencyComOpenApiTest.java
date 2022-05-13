@@ -9,7 +9,7 @@ import by.mrf1n.finance.currencycom.model.SummaryDto;
 import by.mrf1n.finance.currencycom.model.TickerDto;
 import by.mrf1n.finance.currencycom.model.enums.Depth;
 import by.mrf1n.finance.currencycom.model.enums.Interval;
-import by.mrf1n.finance.currencycom.model.enums.TradeType;
+import by.mrf1n.finance.currencycom.model.enums.TradeTypeCap;
 import by.mrf1n.finance.currencycom.webclient.WebClientCurrencyComOpenApi;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +59,7 @@ public class MarketCapCurrencyComOpenApiTest {
 
     @Test
     public void getListOfTradesCryptoTest() {
-        List<CompletedTrade> completedTrades = marketCryptoContext.getListOfTrades("UNI/USD", TradeType.SELL);
+        List<CompletedTrade> completedTrades = marketCryptoContext.getListOfTrades("UNI/USD", TradeTypeCap.SELL);
         System.out.println(completedTrades);
         Assert.notEmpty(completedTrades, "List of CompletedTrade is empty");
     }

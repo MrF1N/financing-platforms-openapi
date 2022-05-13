@@ -1,6 +1,7 @@
 package by.mrf1n.finance.currencycom.model;
 
-import by.mrf1n.finance.currencycom.model.enums.TradeTypeCap;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -13,14 +14,15 @@ import java.math.BigInteger;
 @Getter
 @Setter
 @ToString
+@Builder
 @EqualsAndHashCode
 @RequiredArgsConstructor
-public class CompletedTrade implements Serializable {
+@AllArgsConstructor
+public class SignedBySymbolRequest implements Serializable {
 
-    private BigInteger tradeID;
-    private Double price;
-    private Double base_volume;
-    private Double quote_volume;
-    private BigInteger trade_timestamp;
-    private TradeTypeCap type;
+    private String apiKey;
+    private BigInteger recvWindow;
+    private String signature;
+    private String symbol;
+    private BigInteger timestamp;
 }

@@ -1,11 +1,11 @@
 package by.mrf1n.finance.currencycom.model;
 
-import by.mrf1n.finance.currencycom.model.enums.LeveragingType;
 import by.mrf1n.finance.currencycom.model.enums.OrderStatus;
 import by.mrf1n.finance.currencycom.model.enums.OrderType;
+import by.mrf1n.finance.currencycom.model.enums.TimeInForce;
 import by.mrf1n.finance.currencycom.model.enums.TradeType;
+import by.mrf1n.finance.currencycom.model.enums.TradeTypeCap;
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
@@ -21,24 +21,26 @@ import java.math.BigInteger;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GetOrderDtoResponse implements Serializable {
+public class QueryOrderResponse implements Serializable {
 
     private String accountId;
-    private Double execPrice;
-    private Double execQuantity;
-    private BigInteger expireTime;
+    private String executedQty;
+    private BigInteger expireTimestamp;
     private Boolean guaranteedStopLoss;
+    private String icebergQty;
+    private Boolean leverage;
     private Double margin;
     private String orderId;
-    private Double price;
-    private Double quantity;
+    private String origQty;
+    private String price;
     private TradeType side;
     private OrderStatus status;
     private Double stopLoss;
-    private LeveragingType stopLossType;
+    private String symbol;
     private Double takeProfit;
-    private LeveragingType takeProfitType;
-    private String timeInForceType;
-    private BigInteger timestamp;
+    private BigInteger time;
+    private TimeInForce timeInForce;
     private OrderType type;
+    private BigInteger updateTime;
+    private Boolean working;
 }

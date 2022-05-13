@@ -4,6 +4,7 @@ public enum MarkerMode {
 
   CLOSED_FOR_CORPORATE_ACTION,
   CLOSE_ONLY,
+  DELISTING,
   HOLIDAY,
   LONG_ONLY,
   REGULAR,

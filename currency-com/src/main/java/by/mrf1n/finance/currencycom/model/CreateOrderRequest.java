@@ -1,8 +1,8 @@
 package by.mrf1n.finance.currencycom.model;
 
-import by.mrf1n.finance.currencycom.model.enums.LeveragingType;
 import by.mrf1n.finance.currencycom.model.enums.OrderStatus;
 import by.mrf1n.finance.currencycom.model.enums.OrderType;
+import by.mrf1n.finance.currencycom.model.enums.TimeInForce;
 import by.mrf1n.finance.currencycom.model.enums.TradeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,27 +18,26 @@ import java.math.BigInteger;
 @Getter
 @Setter
 @ToString
+@Builder
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class GetOrderDtoResponse implements Serializable {
+public class CreateOrderRequest implements Serializable {
 
     private String accountId;
-    private Double execPrice;
-    private Double execQuantity;
-    private BigInteger expireTime;
+    private String apiKey;
+    private BigInteger expireTimestamp;
     private Boolean guaranteedStopLoss;
-    private Double margin;
-    private String orderId;
-    private Double price;
+    private Boolean leverage;
+    private String newOrderRespType;
+    private String price;
     private Double quantity;
+    private BigInteger recvWindow;
     private TradeType side;
-    private OrderStatus status;
+    private String signature;
     private Double stopLoss;
-    private LeveragingType stopLossType;
+    private String symbol;
     private Double takeProfit;
-    private LeveragingType takeProfitType;
-    private String timeInForceType;
     private BigInteger timestamp;
     private OrderType type;
 }

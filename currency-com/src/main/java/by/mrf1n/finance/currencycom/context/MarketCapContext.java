@@ -3,7 +3,7 @@ package by.mrf1n.finance.currencycom.context;
 import by.mrf1n.finance.currencycom.model.*;
 import by.mrf1n.finance.currencycom.model.enums.Depth;
 import by.mrf1n.finance.currencycom.model.enums.Interval;
-import by.mrf1n.finance.currencycom.model.enums.TradeType;
+import by.mrf1n.finance.currencycom.model.enums.TradeTypeCap;
 import org.springframework.lang.NonNull;
 
 import javax.naming.OperationNotSupportedException;
@@ -28,6 +28,6 @@ public interface MarketCapContext {
 
     List<TickerDto> getPriceChange();
 
-    List<CompletedTrade> getListOfTrades(@NonNull String symbol, TradeType type);
+    List<CompletedTrade> getListOfTrades(@NonNull String symbol, TradeTypeCap type);
 
 }

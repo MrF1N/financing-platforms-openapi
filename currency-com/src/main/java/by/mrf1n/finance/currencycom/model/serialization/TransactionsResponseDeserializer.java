@@ -34,7 +34,7 @@ public class TransactionsResponseDeserializer extends StdDeserializer<Transactio
             Double commission = node.get("commission").doubleValue();
             String currency = node.get("currency").asText();
             BigInteger id = node.get("id").bigIntegerValue();
-            String paymentMethod = node.get("paymentMethod").asText();
+            String paymentMethod = node.get("paymentMethod") == null ? null : node.get("paymentMethod").asText();
             String status = node.get("status").asText();
             BigInteger timestamp = node.get("timestamp").bigIntegerValue();
             String type = node.get("type").asText();

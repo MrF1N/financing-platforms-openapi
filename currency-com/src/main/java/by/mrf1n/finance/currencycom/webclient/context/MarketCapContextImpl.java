@@ -1,12 +1,11 @@
 package by.mrf1n.finance.currencycom.webclient.context;
 
-import by.mrf1n.finance.currencycom.model.enums.TradeType;
+import by.mrf1n.finance.currencycom.model.enums.TradeTypeCap;
 import by.mrf1n.finance.currencycom.property.CurrencyComMarketProperties;
 import by.mrf1n.finance.currencycom.context.MarketCapContext;
 import by.mrf1n.finance.currencycom.model.*;
 import by.mrf1n.finance.currencycom.model.enums.Depth;
 import by.mrf1n.finance.currencycom.model.enums.Interval;
-import by.mrf1n.finance.currencycom.webclient.context.BaseContextImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.web.reactive.function.client.WebClient;
@@ -90,7 +89,7 @@ public abstract class MarketCapContextImpl extends BaseContextImpl implements Ma
     }
 
     @Override
-    public List<CompletedTrade> getListOfTrades(String symbol, TradeType type) {
+    public List<CompletedTrade> getListOfTrades(String symbol, TradeTypeCap type) {
         return this.client.get()
                 .uri(builder -> builder.path(this.marketProperties.getListOfTrades())
                         .queryParamIfPresent("symbol", Optional.ofNullable(symbol))
