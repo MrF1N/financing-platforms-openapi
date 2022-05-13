@@ -1,8 +1,6 @@
 package by.mrf1n.finance.currencycom.webclient.context.adapter;
 
 import by.mrf1n.finance.currencycom.context.TradeLeverageContext;
-import by.mrf1n.finance.currencycom.model.AccountResponse;
-import by.mrf1n.finance.currencycom.model.AggTradesResponse;
 import by.mrf1n.finance.currencycom.model.CloseTradingPositionRequest;
 import by.mrf1n.finance.currencycom.model.TradingPositionCloseAllResponse;
 import by.mrf1n.finance.currencycom.webclient.context.AdapterBaseContextImpl;
@@ -23,7 +21,7 @@ public class TradeLeverageContextImpl extends AdapterBaseContextImpl implements 
     public TradingPositionCloseAllResponse closeTradingPosition(CloseTradingPositionRequest request) {
         return this.client.post()
                 .uri(uriBuilder ->
-                        this.createURIWithSignature(
+                        this.createUriWithSignature(
                                 this.buildWithTime(uriBuilder, adapterProps.getTradingPositionClose(), request.getTimestamp())
                                         .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
                                         .queryParamIfPresent("positionId", Optional.ofNullable(request.getPositionId()))

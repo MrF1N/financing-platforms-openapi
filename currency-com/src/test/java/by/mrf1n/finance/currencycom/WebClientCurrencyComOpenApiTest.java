@@ -13,9 +13,15 @@ import by.mrf1n.finance.currencycom.model.BlockchainAddressGetResponse;
 import by.mrf1n.finance.currencycom.model.BlockchainAddressRequest;
 import by.mrf1n.finance.currencycom.model.CloseTradingPositionRequest;
 import by.mrf1n.finance.currencycom.model.CurrencyResponse;
+import by.mrf1n.finance.currencycom.model.DepthRequest;
+import by.mrf1n.finance.currencycom.model.DepthResponse;
 import by.mrf1n.finance.currencycom.model.ExchangeInfo;
+import by.mrf1n.finance.currencycom.model.GetOrderDtoResponse;
+import by.mrf1n.finance.currencycom.model.GetOrderRequest;
 import by.mrf1n.finance.currencycom.model.KLinesRequest;
 import by.mrf1n.finance.currencycom.model.TradingPositionCloseAllResponse;
+import by.mrf1n.finance.currencycom.model.TransactionsRequest;
+import by.mrf1n.finance.currencycom.model.TransactionsResponse;
 import by.mrf1n.finance.currencycom.model.enums.Interval;
 import by.mrf1n.finance.currencycom.webclient.WebClientCurrencyComOpenApi;
 import org.junit.jupiter.api.Test;
@@ -40,7 +46,7 @@ public class WebClientCurrencyComOpenApiTest {
     private CurrencyComOpenApiConfig config;
 
     @Test
-    public void getAccountInfo() {
+    public void getAccountInfoTest() {
         AccountRequest request = AccountRequest.builder()
                 .recvWindow(BigInteger.valueOf(60000))
                 .showZeroBalance(true)
@@ -51,7 +57,7 @@ public class WebClientCurrencyComOpenApiTest {
     }
 
     @Test
-    public void getTradesAggregated() {
+    public void getTradesAggregatedTest() {
         AggTradesRequest request = AggTradesRequest.builder()
                 .symbol("LTC/BTC")
                 .startTime(null)
@@ -93,9 +99,46 @@ public class WebClientCurrencyComOpenApiTest {
     }
 
     @Test
+    public void getListOfDepositsTest() {
+        TransactionsRequest request = TransactionsRequest.builder()
+                .startTime(null)
+                .endTime(null)
+                .limit(100)
+                .recvWindow(BigInteger.valueOf(5000L))
+                .build();
+        TransactionsResponse response = accountContext.getListOfDeposits(request);
+        System.out.println(response);
+        Assert.notNull(response, "TransactionsResponse shouldn't be null");
+    }
+
+    @Test
+    public void getOrderBookTest() {
+        DepthRequest request = DepthRequest.builder()
+                .limit(1000)
+                .symbol("BTC/USD")
+                .build();
+        DepthResponse response = tradeContext.getOrderBook(request);
+        System.out.println(response);
+        Assert.notNull(request, "DepthResponse shouldn't be null");
+    }
+
+    @Test
     public void getExchangeInfoTest() {
         ExchangeInfo exchangeInfo = marketContext.getExchangeInfo();
         System.out.println(exchangeInfo);
+        Assert.notNull(exchangeInfo, "ExchangeInfo shouldn't be null");
+    }
+
+    @Test
+    public void getOrderTest() {
+        GetOrderRequest request = GetOrderRequest.builder()
+                .orderId("00000000-0000-0002-0000-000006205692")
+                .recvWindow(BigInteger.valueOf(60000))
+                .symbol("DOGE%2FUSD")
+                .build();
+        GetOrderDtoResponse order = tradeContext.getOrder(request);
+        System.out.println(order);
+        Assert.notNull(order, "GetOrderDtoResponse shouldn't be null");
     }
 
     @Test

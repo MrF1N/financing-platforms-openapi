@@ -1,8 +1,6 @@
 package by.mrf1n.finance.currencycom.webclient.context;
 
 
-import by.mrf1n.finance.currencycom.CurrencyComOpenApiConfig;
-import by.mrf1n.finance.currencycom.property.CurrencyComAdapterProperties;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.commons.codec.digest.HmacAlgorithms;
 import org.apache.commons.codec.digest.HmacUtils;
@@ -42,10 +40,24 @@ public abstract class BaseContextImpl {
     return new HmacUtils(HmacAlgorithms.HMAC_SHA_256, this.authSecret).hmacHex(data);
   }
 
-  protected URI createURIWithSignature(URI uriWithoutSignature) {
+  protected URI createUriWithSignature(URI uriWithoutSignature) {
     return new DefaultUriBuilderFactory().uriString(uriWithoutSignature.toString())
             .queryParam("signature", this.encodeHmacSha256(uriWithoutSignature.getQuery()))
             .build();
+  }
+
+  protected URI createRawUriWithSignature(URI uriWithoutSignature) {
+    DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory();
+    factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
+    return factory.uriString(uriWithoutSignature.toString())
+            .queryParam("signature", this.encodeHmacSha256(uriWithoutSignature.getRawQuery()))
+            .build();
+  }
+
+  protected UriBuilder disableEncoding(UriBuilder uriBuilder) {
+    DefaultUriBuilderFactory factory = new DefaultUriBuilderFactory();
+    factory.setEncodingMode(DefaultUriBuilderFactory.EncodingMode.NONE);
+    return factory.uriString(uriBuilder.build().toString());
   }
 
   @Autowired

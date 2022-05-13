@@ -26,7 +26,7 @@ public class MarketContextImpl extends AdapterBaseContextImpl implements MarketC
     public CurrencyResponse getListOfCurrencies() {
         return this.client.get()
                 .uri(uriBuilder ->
-                        this.createURIWithSignature(
+                        this.createUriWithSignature(
                                 this.buildWithTime(uriBuilder, adapterProps.getListOfCurrencies(), null)
                                         .build()
                         )
@@ -40,7 +40,7 @@ public class MarketContextImpl extends AdapterBaseContextImpl implements MarketC
     public BlockchainAddressGetResponse getDepositAddress(BlockchainAddressRequest request) {
         return this.client.get()
                 .uri(uriBuilder ->
-                        this.createURIWithSignature(
+                        this.createUriWithSignature(
                                 this.buildWithTime(uriBuilder, adapterProps.getStringOfAddress(), request.getTimestamp())
                                         .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
                                         .queryParam("coin", request.getCoin())

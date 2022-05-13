@@ -3,10 +3,11 @@ package by.mrf1n.finance.currencycom.webclient.context.adapter;
 import by.mrf1n.finance.currencycom.context.AccountContext;
 import by.mrf1n.finance.currencycom.model.AccountRequest;
 import by.mrf1n.finance.currencycom.model.AccountResponse;
+import by.mrf1n.finance.currencycom.model.TransactionsRequest;
+import by.mrf1n.finance.currencycom.model.TransactionsResponse;
 import by.mrf1n.finance.currencycom.webclient.context.AdapterBaseContextImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-import org.springframework.web.reactive.function.client.WebClient;
 
 import java.util.Optional;
 
@@ -22,7 +23,7 @@ public class AccountContextImpl extends AdapterBaseContextImpl implements Accoun
     public AccountResponse getAccountInfo(AccountRequest request) {
         return this.client.get()
                 .uri(uriBuilder ->
-                        this.createURIWithSignature(
+                        this.createUriWithSignature(
                                 this.buildWithTime(uriBuilder, adapterProps.getAccountInfo(), request.getTimestamp())
                                         .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
                                         .queryParamIfPresent("showZeroBalance", Optional.ofNullable(request.getShowZeroBalance()))
@@ -31,6 +32,24 @@ public class AccountContextImpl extends AdapterBaseContextImpl implements Accoun
                 )
                 .retrieve()
                 .bodyToMono(AccountResponse.class)
+                .block();
+    }
+
+    @Override
+    public TransactionsResponse getListOfDeposits(TransactionsRequest request) {
+        return this.client.get()
+                .uri(uriBuilder ->
+                        this.createUriWithSignature(
+                                this.buildWithTime(uriBuilder, adapterProps.getListOfDeposits(), request.getTimestamp())
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .queryParamIfPresent("startTime", Optional.ofNullable(request.getStartTime()))
+                                        .queryParamIfPresent("endTime", Optional.ofNullable(request.getEndTime()))
+                                        .queryParamIfPresent("limit", Optional.ofNullable(request.getLimit()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(TransactionsResponse.class)
                 .block();
     }
 }

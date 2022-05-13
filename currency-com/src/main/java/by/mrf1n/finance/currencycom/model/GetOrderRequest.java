@@ -9,6 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.math.BigInteger;
 
 @Getter
 @Setter
@@ -17,8 +18,13 @@ import java.io.Serializable;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class DepthRequest implements Serializable {
+public class GetOrderRequest implements Serializable {
 
-  private Integer limit;
-  private String symbol;
+
+    private String apiKey;
+    private BigInteger recvWindow;
+    private String signature;
+    private BigInteger timestamp;
+    private String orderId;
+    private String symbol;
 }
