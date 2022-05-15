@@ -4,7 +4,10 @@ import by.mrf1n.finance.currencycom.context.TradeLeverageContext;
 import by.mrf1n.finance.currencycom.model.CloseTradingPositionRequest;
 import by.mrf1n.finance.currencycom.model.LeverageSettingsRequest;
 import by.mrf1n.finance.currencycom.model.LeverageSettingsResponse;
+import by.mrf1n.finance.currencycom.model.PositionDto;
+import by.mrf1n.finance.currencycom.model.SignedRequest;
 import by.mrf1n.finance.currencycom.model.TradingPositionCloseAllResponse;
+import by.mrf1n.finance.currencycom.model.TradingPositionListResponse;
 import by.mrf1n.finance.currencycom.webclient.context.AdapterBaseContextImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -49,6 +52,21 @@ public class TradeLeverageContextImpl extends AdapterBaseContextImpl implements 
                 )
                 .retrieve()
                 .bodyToMono(LeverageSettingsResponse.class)
+                .block();
+    }
+
+    @Override
+    public TradingPositionListResponse getListOfLeverageTrades(SignedRequest request) {
+        return this.client.get()
+                .uri(uriBuilder ->
+                        this.createUriWithSignature(
+                                this.buildWithTime(uriBuilder, adapterProps.getListOfLeverageTrades(), request.getTimestamp())
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(TradingPositionListResponse.class)
                 .block();
     }
 }

@@ -4,6 +4,8 @@ import by.mrf1n.finance.currencycom.context.TradeContext;
 import by.mrf1n.finance.currencycom.model.AggTradesRequest;
 import by.mrf1n.finance.currencycom.model.AggTradesResponse;
 import by.mrf1n.finance.currencycom.model.AllMyTradesRequest;
+import by.mrf1n.finance.currencycom.model.CancelOrderRequest;
+import by.mrf1n.finance.currencycom.model.CancelOrderResponse;
 import by.mrf1n.finance.currencycom.model.CreateOrderRequest;
 import by.mrf1n.finance.currencycom.model.DepthRequest;
 import by.mrf1n.finance.currencycom.model.DepthResponse;
@@ -11,8 +13,11 @@ import by.mrf1n.finance.currencycom.model.GetOrderDtoResponse;
 import by.mrf1n.finance.currencycom.model.GetOrderRequest;
 import by.mrf1n.finance.currencycom.model.MyTradesResponse;
 import by.mrf1n.finance.currencycom.model.NewOrderResponse;
+import by.mrf1n.finance.currencycom.model.PositionExecutionReportDto;
+import by.mrf1n.finance.currencycom.model.PositionHistoryRequest;
 import by.mrf1n.finance.currencycom.model.QueryOrderResponse;
 import by.mrf1n.finance.currencycom.model.SignedBySymbolRequest;
+import by.mrf1n.finance.currencycom.model.TradingPositionHistoryResponse;
 import by.mrf1n.finance.currencycom.model.TransactionsRequest;
 import by.mrf1n.finance.currencycom.model.TransactionsResponse;
 import by.mrf1n.finance.currencycom.webclient.context.AdapterBaseContextImpl;
@@ -155,6 +160,41 @@ public class TradeContextImpl extends AdapterBaseContextImpl implements TradeCon
                 )
                 .retrieve()
                 .bodyToMono(NewOrderResponse.class)
+                .block();
+    }
+
+    @Override
+    public CancelOrderResponse cancelOrder(CancelOrderRequest request) {
+        return this.client.delete()
+                .uri(uriBuilder ->
+                        this.createRawUriWithSignature(
+                                this.buildWithTime(this.disableEncoding(uriBuilder), adapterProps.getCreateOrder(), request.getTimestamp())
+                                        .queryParam("orderId", request.getOrderId())
+                                        .queryParam("symbol", request.getSymbol())
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(CancelOrderResponse.class)
+                .block();
+    }
+
+    @Override
+    public TradingPositionHistoryResponse getListOfHistoricalPositions(PositionHistoryRequest request) {
+        return this.client.get()
+                .uri(uriBuilder ->
+                        this.createRawUriWithSignature(
+                                this.buildWithTime(this.disableEncoding(uriBuilder),
+                                                adapterProps.getListOfHistoricalPositions(), request.getTimestamp())
+                                        .queryParamIfPresent("symbol", Optional.ofNullable(request.getSymbol()))
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .queryParamIfPresent("limit", Optional.ofNullable(request.getLimit()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(TradingPositionHistoryResponse.class)
                 .block();
     }
 }

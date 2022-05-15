@@ -12,6 +12,9 @@ import by.mrf1n.finance.currencycom.model.AggTradesResponse;
 import by.mrf1n.finance.currencycom.model.AllMyTradesRequest;
 import by.mrf1n.finance.currencycom.model.BlockchainAddressGetResponse;
 import by.mrf1n.finance.currencycom.model.BlockchainAddressRequest;
+import by.mrf1n.finance.currencycom.model.BySymbolRequest;
+import by.mrf1n.finance.currencycom.model.CancelOrderRequest;
+import by.mrf1n.finance.currencycom.model.CancelOrderResponse;
 import by.mrf1n.finance.currencycom.model.CloseTradingPositionRequest;
 import by.mrf1n.finance.currencycom.model.CreateOrderRequest;
 import by.mrf1n.finance.currencycom.model.CurrencyResponse;
@@ -26,9 +29,17 @@ import by.mrf1n.finance.currencycom.model.LeverageSettingsRequest;
 import by.mrf1n.finance.currencycom.model.LeverageSettingsResponse;
 import by.mrf1n.finance.currencycom.model.MyTradesResponse;
 import by.mrf1n.finance.currencycom.model.NewOrderResponse;
+import by.mrf1n.finance.currencycom.model.PositionHistoryRequest;
 import by.mrf1n.finance.currencycom.model.QueryOrderResponse;
+import by.mrf1n.finance.currencycom.model.ServerTime;
 import by.mrf1n.finance.currencycom.model.SignedBySymbolRequest;
+import by.mrf1n.finance.currencycom.model.SignedRequest;
+import by.mrf1n.finance.currencycom.model.Ticker24HResponse;
+import by.mrf1n.finance.currencycom.model.TradingFeesResponse;
+import by.mrf1n.finance.currencycom.model.TradingLimitsResponse;
 import by.mrf1n.finance.currencycom.model.TradingPositionCloseAllResponse;
+import by.mrf1n.finance.currencycom.model.TradingPositionHistoryResponse;
+import by.mrf1n.finance.currencycom.model.TradingPositionListResponse;
 import by.mrf1n.finance.currencycom.model.TransactionsRequest;
 import by.mrf1n.finance.currencycom.model.TransactionsResponse;
 import by.mrf1n.finance.currencycom.model.enums.Interval;
@@ -91,7 +102,7 @@ public class WebClientCurrencyComOpenApiTest {
     }
 
     @Test
-    public void getListOfCurrenciesTest(){
+    public void getListOfCurrenciesTest() {
         CurrencyResponse listOfCurrencies = marketContext.getListOfCurrencies();
         System.out.println(listOfCurrencies);
         Assert.notNull(listOfCurrencies, "CurrencyResponse should be filled");
@@ -184,55 +195,122 @@ public class WebClientCurrencyComOpenApiTest {
         Assert.notNull(response, "TransactionsResponse shouldn't be null");
     }
 
-     @Test
-     public void getLeverageSettingsTest() {
-         LeverageSettingsRequest request = LeverageSettingsRequest.builder()
-                 .recvWindow(BigInteger.valueOf(10000))
-                 .symbol("BTC%2FUSD_LEVERAGE")
-                 .build();
-         LeverageSettingsResponse leverageSettings = leverageContext.getLeverageSettings(request);
-         System.out.println(leverageSettings);
-         Assert.notNull(leverageSettings, "LeverageSettingsResponse shouldn't be null");
-     }
+    @Test
+    public void getLeverageSettingsTest() {
+        LeverageSettingsRequest request = LeverageSettingsRequest.builder()
+                .recvWindow(BigInteger.valueOf(10000))
+                .symbol("BTC%2FUSD_LEVERAGE")
+                .build();
+        LeverageSettingsResponse leverageSettings = leverageContext.getLeverageSettings(request);
+        System.out.println(leverageSettings);
+        Assert.notNull(leverageSettings, "LeverageSettingsResponse shouldn't be null");
+    }
 
-     @Test
-     public void getListOfTradesTest() {
-         AllMyTradesRequest request = AllMyTradesRequest.builder()
-                 .symbol("BTC%2FUSD")
-                 .recvWindow(BigInteger.valueOf(10000))
-                 .startTime(null)
-                 .endTime(null)
-                 .limit(null)
-                 .build();
-         List<MyTradesResponse> response = tradeContext.getListOfTrades(request);
-         System.out.println(response);
-         Assert.notNull(response, "List<MyTradesResponse> shouldn't be empty");
-     }
+    @Test
+    public void getListOfTradesTest() {
+        AllMyTradesRequest request = AllMyTradesRequest.builder()
+                .symbol("BTC%2FUSD")
+                .recvWindow(BigInteger.valueOf(10000))
+                .startTime(null)
+                .endTime(null)
+                .limit(null)
+                .build();
+        List<MyTradesResponse> response = tradeContext.getListOfTrades(request);
+        System.out.println(response);
+        Assert.notNull(response, "List<MyTradesResponse> shouldn't be empty");
+    }
 
-     @Test
-     public void getListOfOpenOrdersTest() {
-         SignedBySymbolRequest request = SignedBySymbolRequest.builder()
-                 .recvWindow(BigInteger.valueOf(10000))
-                 .symbol(null)
-                 .build();
-         List<QueryOrderResponse> response = tradeContext.getListOfOpenOrders(request);
-         System.out.println(response);
-         Assert.notNull(response, "List<QueryOrderResponse> shouldn't be empty");
-     }
+    @Test
+    public void getListOfOpenOrdersTest() {
+        SignedBySymbolRequest request = SignedBySymbolRequest.builder()
+                .recvWindow(BigInteger.valueOf(10000))
+                .symbol(null)
+                .build();
+        List<QueryOrderResponse> response = tradeContext.getListOfOpenOrders(request);
+        System.out.println(response);
+        Assert.notNull(response, "List<QueryOrderResponse> shouldn't be empty");
+    }
 
-     @Test
-     public void createOrderTest() {
-         CreateOrderRequest request = CreateOrderRequest.builder()
-                 .quantity(0.01)
-                 .side(TradeType.SELL)
-                 .symbol("LTC%2FUSD")
-                 .type(OrderType.LIMIT)
-                 .price("100")
-                 .build();
-         NewOrderResponse order = tradeContext.createOrder(request);
-         System.out.println(order);
-         Assert.notNull(order, "NewOrderResponse shouldn't be null");
-     }
+    @Test
+    public void createOrderTest() {
+        CreateOrderRequest request = CreateOrderRequest.builder()
+                .quantity(0.01)
+                .side(TradeType.SELL)
+                .symbol("LTC%2FUSD")
+                .type(OrderType.LIMIT)
+                .price("100")
+                .build();
+        NewOrderResponse order = tradeContext.createOrder(request);
+        System.out.println(order);
+        Assert.notNull(order, "NewOrderResponse shouldn't be null");
+    }
+
+    @Test
+    public void cancelOrderTest() {
+        CancelOrderRequest request = CancelOrderRequest.builder()
+                .orderId("00000000-0000-0000-0000-000007b288ac")
+                .symbol("LTC%2FUSD")
+                .build();
+        CancelOrderResponse order = tradeContext.cancelOrder(request);
+        System.out.println(order);
+        Assert.notNull(order, "CancelOrderResponse shouldn't be null");
+    }
+
+    @Test
+    public void getPriceChangeTest() {
+        BySymbolRequest request = BySymbolRequest.builder()
+                .symbol("BTC/USD")
+                .build();
+        Ticker24HResponse order = marketContext.getPriceChange(request);
+        System.out.println(order);
+        Assert.notNull(order, "Ticker24HResponse shouldn't be null");
+    }
+
+    @Test
+    public void getServerTimeTest() {
+        ServerTime serverTime = environmentContext.getServerTime();
+        System.out.println(serverTime);
+        Assert.notNull(serverTime, "ServerTime shouldn't be null");
+    }
+
+    @Test
+    public void getListOfFeesTest() {
+        BySymbolRequest request = BySymbolRequest.builder()
+                .symbol("BTC/USD")
+                .build();
+        List<TradingFeesResponse> listOfFees = marketContext.getListOfFees(request);
+        System.out.println(listOfFees);
+        Assert.notNull(listOfFees, "TradingFeesResponse shouldn't be empty");
+    }
+
+    @Test
+    public void getTradingLimitsTest() {
+        BySymbolRequest request = BySymbolRequest.builder()
+                .symbol("BTC/USD")
+                .build();
+        List<TradingLimitsResponse> tradingLimits = marketContext.getTradingLimits(request);
+        System.out.println(tradingLimits);
+        Assert.notNull(tradingLimits, "TradingLimitsResponse shouldn't be empty");
+    }
+
+    @Test
+    public void getListOfLeverageTradesTest() {
+        SignedRequest request = SignedRequest.builder()
+                .build();
+        TradingPositionListResponse positions = leverageContext.getListOfLeverageTrades(request);
+        System.out.println(positions);
+        Assert.notNull(positions, "TradingPositionListResponse shouldn't be empty");
+    }
+
+    @Test
+    public void getListOfHistoricalPositionsTest() {
+        PositionHistoryRequest request = PositionHistoryRequest.builder()
+                .limit(100)
+                .build();
+        TradingPositionHistoryResponse listOfHistPositions = tradeContext.getListOfHistoricalPositions(request);
+        System.out.println(listOfHistPositions);
+        Assert.notNull(listOfHistPositions, "TradingPositionHistoryResponse shouldn't be empty");
+    }
 
     @Autowired
     public void setWebClientCurrencyComOpenApi(WebClientCurrencyComOpenApi webClientCurrencyComOpenApi) {

@@ -97,7 +97,8 @@ public abstract class MarketCapContextImpl extends BaseContextImpl implements Ma
                         .build()
                 )
                 .retrieve()
-                .bodyToMono(new ParameterizedTypeReference<List<CompletedTrade>>() {})
+                .bodyToFlux(CompletedTrade.class)
+                .collectList()
                 .block();
     }
 
