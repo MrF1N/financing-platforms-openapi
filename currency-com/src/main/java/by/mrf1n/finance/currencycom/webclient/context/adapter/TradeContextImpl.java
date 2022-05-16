@@ -13,7 +13,6 @@ import by.mrf1n.finance.currencycom.model.GetOrderDtoResponse;
 import by.mrf1n.finance.currencycom.model.GetOrderRequest;
 import by.mrf1n.finance.currencycom.model.MyTradesResponse;
 import by.mrf1n.finance.currencycom.model.NewOrderResponse;
-import by.mrf1n.finance.currencycom.model.PositionExecutionReportDto;
 import by.mrf1n.finance.currencycom.model.PositionHistoryRequest;
 import by.mrf1n.finance.currencycom.model.QueryOrderResponse;
 import by.mrf1n.finance.currencycom.model.SignedBySymbolRequest;
@@ -195,6 +194,24 @@ public class TradeContextImpl extends AdapterBaseContextImpl implements TradeCon
                 )
                 .retrieve()
                 .bodyToMono(TradingPositionHistoryResponse.class)
+                .block();
+    }
+
+    @Override
+    public TransactionsResponse getListOfTransactions(TransactionsRequest request) {
+        return this.client.get()
+                .uri(uriBuilder ->
+                        this.createUriWithSignature(
+                                this.buildWithTime(uriBuilder, adapterProps.getListOfTransactions(), request.getTimestamp())
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .queryParamIfPresent("startTime", Optional.ofNullable(request.getStartTime()))
+                                        .queryParamIfPresent("endTime", Optional.ofNullable(request.getEndTime()))
+                                        .queryParamIfPresent("limit", Optional.ofNullable(request.getLimit()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(TransactionsResponse.class)
                 .block();
     }
 }

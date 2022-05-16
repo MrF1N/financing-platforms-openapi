@@ -18,13 +18,14 @@ import java.math.BigInteger;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class TransactionsRequest implements Serializable {
+public class UpdateTradingPositionRequest implements Serializable {
 
     private String apiKey;
+    private Boolean guaranteedStopLoss;
+    private String positionId;
     private BigInteger recvWindow;
     private String signature;
+    private Double stopLoss;
+    private Double takeProfit;
     private BigInteger timestamp;
-    private BigInteger endTime;
-    private Integer limit;
-    private BigInteger startTime;
 }

@@ -37,11 +37,15 @@ import by.mrf1n.finance.currencycom.model.SignedRequest;
 import by.mrf1n.finance.currencycom.model.Ticker24HResponse;
 import by.mrf1n.finance.currencycom.model.TradingFeesResponse;
 import by.mrf1n.finance.currencycom.model.TradingLimitsResponse;
+import by.mrf1n.finance.currencycom.model.TradingOrderUpdateResponse;
 import by.mrf1n.finance.currencycom.model.TradingPositionCloseAllResponse;
 import by.mrf1n.finance.currencycom.model.TradingPositionHistoryResponse;
 import by.mrf1n.finance.currencycom.model.TradingPositionListResponse;
+import by.mrf1n.finance.currencycom.model.TradingPositionUpdateResponse;
 import by.mrf1n.finance.currencycom.model.TransactionsRequest;
 import by.mrf1n.finance.currencycom.model.TransactionsResponse;
+import by.mrf1n.finance.currencycom.model.UpdateTradingOrderRequest;
+import by.mrf1n.finance.currencycom.model.UpdateTradingPositionRequest;
 import by.mrf1n.finance.currencycom.model.enums.Interval;
 import by.mrf1n.finance.currencycom.model.enums.OrderType;
 import by.mrf1n.finance.currencycom.model.enums.TradeType;
@@ -310,6 +314,56 @@ public class WebClientCurrencyComOpenApiTest {
         TradingPositionHistoryResponse listOfHistPositions = tradeContext.getListOfHistoricalPositions(request);
         System.out.println(listOfHistPositions);
         Assert.notNull(listOfHistPositions, "TradingPositionHistoryResponse shouldn't be empty");
+    }
+
+    @Test
+    public void getListOfTransactionsTest() {
+        TransactionsRequest request = TransactionsRequest.builder()
+                .startTime(null)
+                .endTime(null)
+                .limit(100)
+                .recvWindow(BigInteger.valueOf(5000L))
+                .build();
+        TransactionsResponse response = tradeContext.getListOfTransactions(request);
+        System.out.println(response);
+        Assert.notNull(response, "TransactionsResponse shouldn't be null");
+    }
+
+    @Test
+    public void updateLeverageOrderTest() {
+        UpdateTradingOrderRequest request = UpdateTradingOrderRequest.builder()
+                .orderId("")
+                .expireTimestamp(BigInteger.ZERO)
+                .newPrice(null)
+                .guaranteedStopLoss(null)
+                .stopLoss(null)
+                .takeProfit(null)
+                .build();
+        TradingOrderUpdateResponse response = leverageContext.updateLeverageOrder(request);
+        System.out.println(response);
+        Assert.notNull(response, "TradingOrderUpdateResponse shouldn't be null");
+    }
+
+    @Test
+    public void updateLeverageTradeTest() {
+        UpdateTradingPositionRequest request = UpdateTradingPositionRequest.builder()
+                .positionId("")
+                .guaranteedStopLoss(null)
+                .stopLoss(null)
+                .takeProfit(null)
+                .build();
+        TradingPositionUpdateResponse response = leverageContext.updateLeverageTrade(request);
+        System.out.println(response);
+        Assert.notNull(response, "TradingPositionUpdateResponse shouldn't be null");
+    }
+
+    @Test
+    public void getListOfWithdrawalsTest() {
+        TransactionsRequest request = TransactionsRequest.builder()
+                .build();
+        TransactionsResponse response = accountContext.getListOfWithdrawals(request);
+        System.out.println(response);
+        Assert.notNull(response, "TransactionsResponse shouldn't be null");
     }
 
     @Autowired

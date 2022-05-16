@@ -6,8 +6,12 @@ import by.mrf1n.finance.currencycom.model.LeverageSettingsRequest;
 import by.mrf1n.finance.currencycom.model.LeverageSettingsResponse;
 import by.mrf1n.finance.currencycom.model.PositionDto;
 import by.mrf1n.finance.currencycom.model.SignedRequest;
+import by.mrf1n.finance.currencycom.model.TradingOrderUpdateResponse;
 import by.mrf1n.finance.currencycom.model.TradingPositionCloseAllResponse;
 import by.mrf1n.finance.currencycom.model.TradingPositionListResponse;
+import by.mrf1n.finance.currencycom.model.TradingPositionUpdateResponse;
+import by.mrf1n.finance.currencycom.model.UpdateTradingOrderRequest;
+import by.mrf1n.finance.currencycom.model.UpdateTradingPositionRequest;
 import by.mrf1n.finance.currencycom.webclient.context.AdapterBaseContextImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -67,6 +71,48 @@ public class TradeLeverageContextImpl extends AdapterBaseContextImpl implements 
                 )
                 .retrieve()
                 .bodyToMono(TradingPositionListResponse.class)
+                .block();
+    }
+
+    @Override
+    public TradingOrderUpdateResponse updateLeverageOrder(UpdateTradingOrderRequest request) {
+        return this.client.post()
+                .uri(uriBuilder ->
+                        this.createRawUriWithSignature(
+                                this.buildWithTime(this.disableEncoding(uriBuilder),
+                                                adapterProps.getLeverageOrdersEdit(), request.getTimestamp())
+                                        .queryParam("orderId", request.getOrderId())
+                                        .queryParam("expireTimestamp", request.getExpireTimestamp())
+                                        .queryParamIfPresent("guaranteedStopLoss", Optional.ofNullable(request.getGuaranteedStopLoss()))
+                                        .queryParamIfPresent("newPrice", Optional.ofNullable(request.getNewPrice()))
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .queryParamIfPresent("stopLoss", Optional.ofNullable(request.getStopLoss()))
+                                        .queryParamIfPresent("takeProfit", Optional.ofNullable(request.getTakeProfit()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(TradingOrderUpdateResponse.class)
+                .block();
+    }
+
+    @Override
+    public TradingPositionUpdateResponse updateLeverageTrade(UpdateTradingPositionRequest request) {
+        return this.client.post()
+                .uri(uriBuilder ->
+                        this.createRawUriWithSignature(
+                                this.buildWithTime(this.disableEncoding(uriBuilder),
+                                                adapterProps.getLeverageTradeEdit(), request.getTimestamp())
+                                        .queryParam("positionId", request.getPositionId())
+                                        .queryParamIfPresent("guaranteedStopLoss", Optional.ofNullable(request.getGuaranteedStopLoss()))
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .queryParamIfPresent("stopLoss", Optional.ofNullable(request.getStopLoss()))
+                                        .queryParamIfPresent("takeProfit", Optional.ofNullable(request.getTakeProfit()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(TradingPositionUpdateResponse.class)
                 .block();
     }
 }

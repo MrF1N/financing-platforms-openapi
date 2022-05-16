@@ -16,4 +16,6 @@ public interface AccountContext {
 
   List<FundingLimitsDtoResponse> getFundingLimits();
 
+  TransactionsResponse getListOfWithdrawals(TransactionsRequest request);
+
 }

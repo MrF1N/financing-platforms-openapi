@@ -41,4 +41,6 @@ public interface TradeContext {
   CancelOrderResponse cancelOrder(CancelOrderRequest request);
 
   TradingPositionHistoryResponse getListOfHistoricalPositions(PositionHistoryRequest request);
+
+  TransactionsResponse getListOfTransactions(TransactionsRequest request);
 }

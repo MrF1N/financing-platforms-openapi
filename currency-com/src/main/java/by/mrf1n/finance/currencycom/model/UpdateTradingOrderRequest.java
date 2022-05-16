@@ -1,5 +1,7 @@
 package by.mrf1n.finance.currencycom.model;
 
+import by.mrf1n.finance.currencycom.model.enums.OrderType;
+import by.mrf1n.finance.currencycom.model.enums.TradeType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -18,13 +20,16 @@ import java.math.BigInteger;
 @EqualsAndHashCode
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class TransactionsRequest implements Serializable {
+public class UpdateTradingOrderRequest implements Serializable {
 
     private String apiKey;
+    private BigInteger expireTimestamp;
+    private Boolean guaranteedStopLoss;
+    private Double newPrice;
+    private String orderId;
     private BigInteger recvWindow;
     private String signature;
+    private Double stopLoss;
+    private Double takeProfit;
     private BigInteger timestamp;
-    private BigInteger endTime;
-    private Integer limit;
-    private BigInteger startTime;
 }

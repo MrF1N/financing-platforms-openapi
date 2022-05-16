@@ -69,4 +69,22 @@ public class AccountContextImpl extends AdapterBaseContextImpl implements Accoun
                 .collectList()
                 .block();
     }
+
+    @Override
+    public TransactionsResponse getListOfWithdrawals(TransactionsRequest request) {
+        return this.client.get()
+                .uri(uriBuilder ->
+                        this.createUriWithSignature(
+                                this.buildWithTime(uriBuilder, adapterProps.getListOfWithdrawals(), request.getTimestamp())
+                                        .queryParamIfPresent("recvWindow", Optional.ofNullable(request.getRecvWindow()))
+                                        .queryParamIfPresent("startTime", Optional.ofNullable(request.getStartTime()))
+                                        .queryParamIfPresent("endTime", Optional.ofNullable(request.getEndTime()))
+                                        .queryParamIfPresent("limit", Optional.ofNullable(request.getLimit()))
+                                        .build()
+                        )
+                )
+                .retrieve()
+                .bodyToMono(TransactionsResponse.class)
+                .block();
+    }
 }
