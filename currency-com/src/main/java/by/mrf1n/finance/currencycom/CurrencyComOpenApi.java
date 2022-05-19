@@ -12,7 +12,6 @@ import lombok.ToString;
 
 import java.io.Closeable;
 
-@Getter
 @ToString
 @EqualsAndHashCode
 public abstract class CurrencyComOpenApi implements Closeable {

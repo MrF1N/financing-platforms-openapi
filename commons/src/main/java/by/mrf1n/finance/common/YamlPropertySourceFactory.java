@@ -1,4 +1,4 @@
-package by.mrf1n.finance.currencycom.common;
+package by.mrf1n.finance.common;
 
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.env.PropertiesPropertySource;
@@ -14,7 +14,7 @@ import java.util.Properties;
 public class YamlPropertySourceFactory implements PropertySourceFactory {
 
   @Override
-  public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) throws IOException {
+  public PropertySource<?> createPropertySource(String name, EncodedResource encodedResource) {
     YamlPropertiesFactoryBean factory = new YamlPropertiesFactoryBean();
     factory.setResources(encodedResource.getResource());
 

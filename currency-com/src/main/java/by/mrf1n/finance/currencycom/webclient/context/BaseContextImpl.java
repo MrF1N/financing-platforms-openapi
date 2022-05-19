@@ -19,12 +19,10 @@ public abstract class BaseContextImpl {
   protected String authSecret;
   protected BigInteger recvWindow;
   protected WebClient client;
-  protected ObjectMapper mapper;
 
   public BaseContextImpl(String authKey, String authSecret) {
     this.authKey = authKey;
     this.authSecret = authSecret;
-    this.mapper = new ObjectMapper();
   }
 
   protected UriBuilder buildWithTime(UriBuilder uriBuilder, String path, BigInteger customTime) {

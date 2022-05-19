@@ -1,6 +1,6 @@
 package by.mrf1n.finance.currencycom.property;
 
-import by.mrf1n.finance.currencycom.common.YamlPropertySourceFactory;
+import by.mrf1n.finance.common.YamlPropertySourceFactory;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
