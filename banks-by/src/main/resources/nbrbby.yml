@@ -1,0 +1,8 @@
+api:
+  baseUrl: "https://www.nbrb.by/api/exrates"
+paths:
+  currencies: "/currencies"
+  currenciesById: "/currencies/{id}"
+  rates: "/rates"
+  rateByCode: "/rates/{code}"
+  dynamicsOfRate: "/rates/dynamics/{code}"
