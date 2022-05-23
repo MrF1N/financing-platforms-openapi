@@ -3,3 +3,6 @@ include 'currency-com'
 include 'commons'
 include 'banks-by'
 
+rootProject.children.each {project ->
+    project.buildFileName = "${project.name}.gradle"
+}

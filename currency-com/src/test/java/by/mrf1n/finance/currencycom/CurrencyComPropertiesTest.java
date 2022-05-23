@@ -45,9 +45,9 @@ public class CurrencyComPropertiesTest {
     Assertions.assertEquals("updateTradingOrder", pathProperties.getLeverageOrdersEdit());
     Assertions.assertEquals("updateTradingPosition", pathProperties.getLeverageTradeEdit());
 
-    Assertions.assertEquals("https://api-adapter.backend.currency.com/api/v2/",
+    Assertions.assertEquals("https://api-adapter.backend.currency.com/api/{apiVersion}/",
         apiProperties.getAdapterApiUrl());
-    Assertions.assertEquals("https://demo-api-adapter.backend.currency.com/api/v2/",
+    Assertions.assertEquals("https://demo-api-adapter.backend.currency.com/api/{apiVersion}/",
         apiProperties.getDemoAdapterApiUrl());
   }
 }
