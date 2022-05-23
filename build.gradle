@@ -1,5 +1,6 @@
 configure(rootProject) { project ->
     apply plugin: 'java'
+    apply plugin: 'maven-publish'
 }
 
 configure(allprojects) { project ->
@@ -10,6 +11,7 @@ configure(allprojects) { project ->
 
 configure(subprojects) { project ->
     apply plugin: 'java-library'
+    apply plugin: 'maven-publish'
 
     repositories {
         mavenCentral()
@@ -18,4 +20,18 @@ configure(subprojects) { project ->
     test {
         useJUnitPlatform()
     }
+
+    java {
+        withSourcesJar()
+        withJavadocJar()
+    }
+
+    publishing {
+        publications {
+            maven(MavenPublication) {
+                from components.java
+            }
+        }
+    }
 }
+
