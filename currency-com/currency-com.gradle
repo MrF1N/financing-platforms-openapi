@@ -1,3 +1,11 @@
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+    testCompileOnly {
+        extendsFrom testAnnotationProcessor
+    }
+}
 
 dependencies {
     implementation project(":commons")
