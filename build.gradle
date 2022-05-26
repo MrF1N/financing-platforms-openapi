@@ -1,24 +1,17 @@
-configure(rootProject) { project ->
+allprojects {
+    version '1.0.1'
+    group 'by.mrf1n.finance'
+}
+
+subprojects {
     apply plugin: 'java'
     apply plugin: 'maven-publish'
-}
 
-configure(allprojects) { project ->
-    group 'by.mrf1n.finance'
-    version '1.0.1'
     sourceCompatibility = '17'
-}
-
-configure(subprojects) { project ->
-    apply plugin: 'java-library'
-    apply plugin: 'maven-publish'
+    targetCompatibility = '17'
 
     repositories {
         mavenCentral()
-    }
-
-    test {
-        useJUnitPlatform()
     }
 
     java {
@@ -26,9 +19,16 @@ configure(subprojects) { project ->
         withJavadocJar()
     }
 
+    test {
+        useJUnitPlatform()
+    }
+
     publishing {
         publications {
             maven(MavenPublication) {
+                groupId project.group
+                artifactId project.name
+                version project.version
                 from components.java
             }
         }
