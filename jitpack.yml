@@ -7,4 +7,7 @@ install:
   - echo "Install"
   - if ! bash ensure-java-17 use; then source ~/.sdkman/bin/sdkman-init.sh; fi
   - java -version
-  - ./gradlew publishMavenPublicationToMavenLocal
+  - chmod +x gradlew
+  - ./gradlew tasks --all
+  - ./gradlew install
+  - ./gradlew build publishToMavenLocal
