@@ -9,5 +9,5 @@ install:
   - java -version
   - chmod +x gradlew
   - ./gradlew tasks --all
-  - ./gradlew install
-  - ./gradlew build publishToMavenLocal
+  - ./gradlew install -x test
+  - ./gradlew build publishToMavenLocal -x test
