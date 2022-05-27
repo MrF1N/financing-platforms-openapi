@@ -1,8 +1,7 @@
 allprojects {
     group 'by.mrf1n.finance'
+    version '1.0.1'
 }
-
-version '1.0.1'
 
 subprojects { project ->
     apply plugin: 'java'
