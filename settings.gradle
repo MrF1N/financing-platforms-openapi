@@ -1,3 +1,4 @@
+rootProject.name = 'financing-platforms-openapi'
 include 'currency-com'
 include 'commons'
 include 'banks-by'

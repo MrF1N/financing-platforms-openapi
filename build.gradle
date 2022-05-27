@@ -1,6 +1,9 @@
 allprojects {
-    version '1.0.1'
     group 'by.mrf1n.finance'
+}
+
+rootProject {
+    version '1.0.1'
 }
 
 subprojects {
@@ -16,7 +19,7 @@ subprojects {
 
     java {
         withSourcesJar()
-//        withJavadocJar()
+        withJavadocJar()
     }
 
     test {
