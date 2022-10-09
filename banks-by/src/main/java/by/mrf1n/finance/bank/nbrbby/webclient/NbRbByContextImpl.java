@@ -8,7 +8,7 @@ import by.mrf1n.finance.bank.nbrbby.model.DynamicOfRateRequest;
 import by.mrf1n.finance.bank.nbrbby.model.rate.Rate;
 import by.mrf1n.finance.bank.nbrbby.model.RateShort;
 import by.mrf1n.finance.bank.nbrbby.property.NbRbByApiProperties;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.client.WebClient;
 
@@ -17,15 +17,16 @@ import java.util.Map;
 import java.util.Optional;
 
 @Component
+@RequiredArgsConstructor
 public class NbRbByContextImpl implements NbRbByContext {
 
-    private NbRbByApiProperties properties;
-    private WebClient client;
+    private final NbRbByApiProperties nbRbByApiProperties;
+    private final WebClient nbRbByWebClient;
 
     @Override
     public List<Currency> getAllCurrencies() {
-        return this.client.get()
-                .uri(this.properties.getCurrencies())
+        return this.nbRbByWebClient.get()
+                .uri(this.nbRbByApiProperties.getCurrencies())
                 .retrieve()
                 .bodyToFlux(Currency.class)
                 .collectList()
@@ -34,9 +35,9 @@ public class NbRbByContextImpl implements NbRbByContext {
 
     @Override
     public Currency getCurrencyById(Integer internCurrencyId) {
-        return this.client.get()
+        return this.nbRbByWebClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(this.properties.getCurrenciesById())
+                        .path(this.nbRbByApiProperties.getCurrenciesById())
                         .build(Map.of("id", internCurrencyId.toString()))
                 )
                 .retrieve()
@@ -46,9 +47,9 @@ public class NbRbByContextImpl implements NbRbByContext {
 
     @Override
     public List<Rate> getRatesByPeriodicity(ByPeriodicityRateRequest request) {
-        return this.client.get()
+        return this.nbRbByWebClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(this.properties.getRates())
+                        .path(this.nbRbByApiProperties.getRates())
                         .queryParam("periodicity", request.getPeriodicity())
                         .queryParamIfPresent("ondate", Optional.ofNullable(request.getDateByNbRbFormat()))
                         .build()
@@ -61,9 +62,9 @@ public class NbRbByContextImpl implements NbRbByContext {
 
     @Override
     public Rate getRateByCode(ByCodeRateRequest request) {
-        return this.client.get()
+        return this.nbRbByWebClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(this.properties.getRateByCode())
+                        .path(this.nbRbByApiProperties.getRateByCode())
                         .queryParam("parammode", request.getParamMode())
                         .queryParamIfPresent("ondate", Optional.ofNullable(request.getDateByNbRbFormat()))
                         .build(Map.of("code", request.getCurrencyCode()))
@@ -75,9 +76,9 @@ public class NbRbByContextImpl implements NbRbByContext {
 
     @Override
     public List<RateShort> getRateByDateRange(DynamicOfRateRequest request) {
-        return this.client.get()
+        return this.nbRbByWebClient.get()
                 .uri(uriBuilder -> uriBuilder
-                        .path(this.properties.getDynamicsOfRate())
+                        .path(this.nbRbByApiProperties.getDynamicsOfRate())
                         .queryParam("startdate", request.getStartDateByNbRbFormat())
                         .queryParam("enddate", request.getEndDateByNbRbFormat())
                         .build(Map.of("code", request.getCurrencyId()))
@@ -86,15 +87,5 @@ public class NbRbByContextImpl implements NbRbByContext {
                 .bodyToFlux(RateShort.class)
                 .collectList()
                 .block();
-    }
-
-    @Autowired
-    public void setNbRbByApiProperties(NbRbByApiProperties nbRbByApiProperties) {
-        this.properties = nbRbByApiProperties;
-    }
-
-    @Autowired
-    public void setNbRbByWebClient(WebClient nbRbByWebClient) {
-        this.client = nbRbByWebClient;
     }
 }

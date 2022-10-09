@@ -17,6 +17,8 @@ public class AlfaBankByApiProperties {
 
     @Value("${api.baseUrl}")
     private String baseUrl;
+    @Value("${api.apiVersion}")
+    private String apiVersion;
 
     @Value("${paths.bankCode}")
     private String bankCode;

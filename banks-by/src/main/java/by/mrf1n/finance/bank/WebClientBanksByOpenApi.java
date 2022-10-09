@@ -1,20 +1,21 @@
 package by.mrf1n.finance.bank;
 
 import by.mrf1n.finance.bank.alfabankby.context.AlfaByPublicContext;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 @Service
-public class WebClientBanksByOpenApi extends BanksByOpenApi {
+@RequiredArgsConstructor
+public class WebClientBanksByOpenApi implements BanksByOpenApi {
 
-    @Autowired
-    @Qualifier("alfaByPublicContextImpl")
-    public void setAlfaByPublicContext(AlfaByPublicContext alfaByPublicContext) {
-        this.alfaByPublicContext = alfaByPublicContext;
-    }
+    private final AlfaByPublicContext alfaByPublicContextImpl;
 
     @Override
     public void close() {
+    }
+
+    @Override
+    public AlfaByPublicContext getAlfaByPublicContext() {
+        return alfaByPublicContextImpl;
     }
 }

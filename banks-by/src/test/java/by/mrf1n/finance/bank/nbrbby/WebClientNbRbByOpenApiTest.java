@@ -1,18 +1,17 @@
 package by.mrf1n.finance.bank.nbrbby;
 
 import by.mrf1n.finance.bank.nbrbby.context.NbRbByContext;
+import by.mrf1n.finance.bank.nbrbby.model.Currency;
 import by.mrf1n.finance.bank.nbrbby.model.DynamicOfRateRequest;
 import by.mrf1n.finance.bank.nbrbby.model.RateShort;
-import by.mrf1n.finance.bank.nbrbby.model.enums.CurrencyIdMode;
+import by.mrf1n.finance.bank.nbrbby.model.enums.Periodicity;
 import by.mrf1n.finance.bank.nbrbby.model.rate.ByInternalCodeRateRequest;
 import by.mrf1n.finance.bank.nbrbby.model.rate.ByIsoAbbreviationCodeRateRequest;
 import by.mrf1n.finance.bank.nbrbby.model.rate.ByIsoNumberCodeRateRequest;
 import by.mrf1n.finance.bank.nbrbby.model.rate.ByPeriodicityRateRequest;
-import by.mrf1n.finance.bank.nbrbby.model.Currency;
 import by.mrf1n.finance.bank.nbrbby.model.rate.Rate;
-import by.mrf1n.finance.bank.nbrbby.model.enums.Periodicity;
+import lombok.RequiredArgsConstructor;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.util.Assert;
@@ -23,9 +22,10 @@ import java.util.List;
 
 @ContextConfiguration(classes = {NbRbByOpenApiTestConfig.class})
 @SpringBootTest
+@RequiredArgsConstructor
 public class WebClientNbRbByOpenApiTest {
 
-    private NbRbByContext nbRbByContext;
+    private final NbRbByContext nbRbByContext;
 
     @Test
     public void getAllCurrenciesTest() {
@@ -95,10 +95,5 @@ public class WebClientNbRbByOpenApiTest {
         List<RateShort> response = nbRbByContext.getRateByDateRange(request);
         System.out.println(response);
         Assert.notEmpty(response, "List<RateShort> shouldn't be empty");
-    }
-
-    @Autowired
-    public void setNbRbByContext(NbRbByContext nbRbByContext) {
-        this.nbRbByContext = nbRbByContext;
     }
 }
