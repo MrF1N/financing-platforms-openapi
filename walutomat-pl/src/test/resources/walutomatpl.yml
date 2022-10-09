@@ -1,0 +1,6 @@
+walutomat:
+  api:
+    public-api-url: 'https://user.walutomat.pl/api/public/'
+  path:
+    currencies: 'marketBrief'
+    currency: 'marketBrief/{pairName}'
