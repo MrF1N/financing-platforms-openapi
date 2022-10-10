@@ -53,7 +53,7 @@ public class AlfaByPublicContextImpl implements AlfaByPublicContext {
     @Override
     public RateListResponse getBankRateList() {
         return this.alfaBankByWebClient.get()
-                .uri(this.alfaBankByApiProperties.getNationalRates())
+                .uri(this.alfaBankByApiProperties.getRates())
                 .retrieve()
                 .bodyToMono(RateListResponse.class)
                 .block();
