@@ -6,18 +6,17 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.io.Serializable;
 import java.util.List;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class CurrencyRate implements Serializable {
+public class ExchangeOffers {
 
-    @JsonProperty("pair")
-    private CurrencyPair pairName;
-    private OfferRate bestOffers;
-    private List<ExchangeByTime> lastExchanges;
-    private List<ExchangeByDay> dayExchanges;
+    @JsonProperty("exchange_offers")
+    private List<BankOffer> exchangeOffers;
+    private String type;
+    @JsonProperty("currency_name")
+    private String currencyName;
 }

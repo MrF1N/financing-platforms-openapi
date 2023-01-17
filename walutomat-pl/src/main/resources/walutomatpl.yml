@@ -1,6 +1,23 @@
 walutomat:
   api:
     public-api-url: 'https://user.walutomat.pl/api/public/'
-  path:
-    currencies: 'marketBrief'
-    currency: 'marketBrief/{pairName}'
+    regular-api-url: 'https://api.walutomat.pl/api/v2.0.0/'
+  currency-pairs:
+    - EURGBP
+    - EURUSD
+    - EURCHF
+    - EURPLN
+    - GBPUSD
+    - GBPCHF
+    - GBPPLN
+    - USDCHF
+    - USDPLN
+    - CHFPLN
+    - EURSEK
+    - EURNOK
+    - EURDKK
+    - EURCZK
+    - CZKPLN
+    - DKKPLN
+    - NOKPLN
+    - SEKPLN
