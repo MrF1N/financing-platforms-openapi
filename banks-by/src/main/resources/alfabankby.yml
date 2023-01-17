@@ -1,5 +1,5 @@
 api:
-  baseUrl: "https://ibapi.alfabank.by:8273/partner/{alfaByApiVer}/public"
+  baseUrl: "https://developerhub.alfabank.by:8273/partner/${api.apiVersion:1.0.0}/public"
   apiVersion: "1.0.1"
 paths:
   bankCode: "/banks"

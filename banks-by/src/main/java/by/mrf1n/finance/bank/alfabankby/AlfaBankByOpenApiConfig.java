@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.util.Map;
-
 @Configuration
 @Import({AlfaBankByApiProperties.class})
 @ComponentScan(basePackages = {"by.mrf1n.finance.bank.alfabankby"})
@@ -24,16 +22,10 @@ public class AlfaBankByOpenApiConfig {
     }
 
     @Bean
-    public String alfaByApiVersion() {
-        return alfaBankByApiProps.getApiVersion();
-    }
-
-    @Bean
-    public WebClient alfaBankByWebClient(String alfaByApiUrl, String alfaByApiVersion) {
+    public WebClient alfaBankByWebClient(String alfaByApiUrl) {
         return WebClient
                 .builder()
                 .baseUrl(alfaByApiUrl)
-                .defaultUriVariables(Map.of("alfaByApiVer", alfaByApiVersion))
                 .build();
     }
 }
